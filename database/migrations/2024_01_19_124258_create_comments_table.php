@@ -17,14 +17,19 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            
+
             // atributes 
             $table->text('text');
 
             // foreingID
-            $table->foreignIdFor(ProfileUser::class);
-            $table->foreignIdFor(Post::class);
-            $table->foreignIdFor(Lesson::class);
+            $table->unsignedBigInteger('profile_user_id');
+            $table->foreign('profile_user_id')->references('id')->on('profile_users');
+
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts');
+
+            $table->unsignedBigInteger('lesson_id');
+            $table->foreign('lesson_id')->references('id')->on('lessons');
 
             $table->timestamps();
         });

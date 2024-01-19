@@ -16,10 +16,13 @@ return new class extends Migration
         Schema::create('completes', function (Blueprint $table) {
             $table->id();
 
-             // foreingID
-             $table->foreignIdFor(ProfileUser::class);
-             $table->foreignIdFor(Lesson::class);
-        
+            // foreingID
+            $table->unsignedBigInteger('profile_user_id');
+            $table->foreign('profile_user_id')->references('id')->on('profile_users');
+
+            $table->unsignedBigInteger('lesson_id');
+            $table->foreign('lesson_id')->references('id')->on('lessons');
+
             $table->timestamps();
         });
     }

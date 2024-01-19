@@ -12,21 +12,26 @@ class Post extends Model
     protected $fillable = [
         'text',
         'image',
+        'profile_user_id'
     ];
 
-    public function profile_user() {
+    public function profile_user()
+    {
         return $this->belongsTo(ProfileUser::class);
     }
 
-    public function comment() {
+    public function comment()
+    {
         return $this->hasMany(Comment::class);
     }
 
-    public function like() {
+    public function like()
+    {
         return $this->hasMany(Like::class);
     }
 
-    public function deslike() {
+    public function deslike()
+    {
         return $this->hasMany(Deslike::class);
     }
 }

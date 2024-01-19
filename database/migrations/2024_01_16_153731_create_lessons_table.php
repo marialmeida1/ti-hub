@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('link', 250);
 
             // foreingID
-            $table->foreignIdFor(Course::class);
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
+
 
             $table->timestamps();
         });

@@ -19,15 +19,19 @@ return new class extends Migration
             $table->id();
 
             // foreingID
-            $table->foreignIdFor(ProfileUser::class);
-            $table->foreignIdFor(Post::class);
-            $table->foreignIdFor(Comment::class);
+            $table->unsignedBigInteger('profile_user_id');
+            $table->foreign('profile_user_id')->references('id')->on('profile_users');
+
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts');
+
+            $table->unsignedBigInteger('comment_id');
+            $table->foreign('comment_id')->references('id')->on('comments');
 
             $table->timestamps();
         });
 
         DB::statement('ALTER TABLE comments ADD CONSTRAINT check_comment_type CHECK ((post_id IS NOT NULL AND comment_id IS NULL) OR (post_id IS NULL AND comment_id IS NOT NULL))');
-
     }
 
     /**

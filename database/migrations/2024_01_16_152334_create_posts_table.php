@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('image')->nullable();
 
             // foreingID
-            $table->foreignIdFor(ProfileUser::class);
+            $table->unsignedBigInteger('profile_user_id');
+            $table->foreign('profile_user_id')->references('id')->on('profile_users');
+
 
             $table->timestamps();
         });

@@ -22,8 +22,11 @@ return new class extends Migration
 
 
             // foreingID
-            $table->foreignIdFor(ProfileUser::class);
-            $table->foreignIdFor(Lesson::class);
+            $table->unsignedBigInteger('profile_user_id');
+            $table->foreign('profile_user_id')->references('id')->on('profile_users');
+
+            $table->unsignedBigInteger('lesson_id');
+            $table->foreign('lesson_id')->references('id')->on('lessons');
 
 
             $table->timestamps();

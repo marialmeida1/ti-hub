@@ -10,26 +10,34 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'text'
+        'text',
+        'profile_user_id',
+        'post_id',
+        'lesson_id',
     ];
 
-    public function profile_user() {
+    public function profile_user()
+    {
         return $this->belongsTo(ProfileUser::class);
     }
 
-    public function post() {
+    public function post()
+    {
         return $this->belongsTo(Post::class);
     }
 
-    public function lesson() {
+    public function lesson()
+    {
         return $this->belongsTo(Lesson::class);
     }
 
-    public function like() {
+    public function like()
+    {
         return $this->hasMany(Like::class);
     }
 
-    public function deslike() {
+    public function deslike()
+    {
         return $this->hasMany(Deslike::class);
     }
 }

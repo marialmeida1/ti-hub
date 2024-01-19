@@ -9,11 +9,17 @@ class Complete extends Model
 {
     use HasFactory;
 
-    public function profile_user() {
+    protected $fillable = [
+        'profile_user_id',
+        'lesson_id',
+    ];
+    public function profile_user()
+    {
         return $this->belongsTo(ProfileUser::class);
     }
 
-    public function lesson() {
+    public function lesson()
+    {
         return $this->belongsTo(Lesson::class);
     }
 }

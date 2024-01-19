@@ -13,21 +13,26 @@ class Lesson extends Model
         'name',
         'description',
         'link',
+        'course_id',
     ];
 
-    public function course() {
+    public function course()
+    {
         return $this->belongsTo(Course::class);
     }
 
-    public function complete() {
+    public function complete()
+    {
         return $this->hasMany(Complete::class);
     }
 
-    public function indication() {
+    public function indication()
+    {
         return $this->hasMany(Indication::class);
     }
 
-    public function comment() {
+    public function comment()
+    {
         return $this->hasMany(Comment::class);
     }
 }

@@ -12,13 +12,17 @@ class Indication extends Model
     protected $fillable = [
         'text',
         'link',
+        'profile_user_id',
+        'lesson_id'
     ];
 
-    public function profile_user() {
+    public function profile_user()
+    {
         return $this->belongsTo(ProfileUser::class);
     }
 
-    public function lesson() {
+    public function lesson()
+    {
         return $this->belongsTo(Lesson::class);
     }
 }

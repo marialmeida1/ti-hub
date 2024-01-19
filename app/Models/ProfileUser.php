@@ -16,33 +16,41 @@ class ProfileUser extends Model
         'image',
         'followers',
         'followings',
+        'user_id',
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function post() {
+    public function post()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function complete() {
+    public function complete()
+    {
         return $this->hasMany(Complete::class);
     }
 
-    public function indication() {
+    public function indication()
+    {
         return $this->hasMany(Indication::class);
     }
 
-    public function comment() {
+    public function comment()
+    {
         return $this->hasMany(Comment::class);
     }
 
-    public function like() {
+    public function like()
+    {
         return $this->hasMany(Like::class);
     }
 
-    public function deslike() {
+    public function deslike()
+    {
         return $this->hasMany(Deslike::class);
     }
 }
