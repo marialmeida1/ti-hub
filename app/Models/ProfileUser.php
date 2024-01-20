@@ -14,8 +14,6 @@ class ProfileUser extends Model
         'location',
         'job',
         'image',
-        'followers',
-        'followings',
         'user_id',
     ];
 
@@ -52,5 +50,15 @@ class ProfileUser extends Model
     public function deslike()
     {
         return $this->hasMany(Deslike::class);
+    }
+
+    public function followers()
+    {
+        return $this->hasMany(Follower::class, 'following_id');
+    }
+
+    public function following()
+    {
+        return $this->hasMany(Follower::class, 'follower_id');
     }
 }

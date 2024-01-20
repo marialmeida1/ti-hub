@@ -18,9 +18,7 @@ class ProfileUserController extends Controller
             'name' => 'required|string|max:80',
             'location' => 'nullable|string|max:200',
             'job' => 'nullable|string|max:120',
-            'image' => 'nullable|string',
-            'followers' => 'nullable|integer',
-            'followings' => 'nullable|integer',
+            'image' => 'nullable|string'
         ]);
 
 
@@ -30,9 +28,7 @@ class ProfileUserController extends Controller
                 'name' => $validate['name'],
                 'location' => $validate['location'],
                 'job' => $validate['job'],
-                'image' => $validate['image'],
-                'followers' => $validate['followers'],
-                'followings' => $validate['followings'],
+                'image' => $validate['image']
             ]);
 
             return response([
@@ -43,7 +39,23 @@ class ProfileUserController extends Controller
 
         return response([
             'message' => 'Usuário não encontrado!'
-        ], 400);
+        ], 404);
+    }
+
+    public function index()
+    {
+
+        $data = ProfileUser::all();
+
+        if ($data) {
+            return response([
+                'data' => $data,
+            ], 200);
+        }
+
+        return response([
+            'message' => 'Usuários não encontrados!'
+        ], 404);
     }
 
     // Show only Profile User
@@ -55,7 +67,7 @@ class ProfileUserController extends Controller
         if (!$find) {
             return response([
                 'message' => 'Não foi possível achar o perfil do usuário.'
-            ], 403);
+            ], 404);
         }
 
         return response([
@@ -72,9 +84,7 @@ class ProfileUserController extends Controller
             'name' => 'required|string|max:80',
             'location' => 'nullable|string|max:200',
             'job' => 'nullable|string|max:120',
-            'image' => 'nullable|string',
-            'followers' => 'nullable|integer',
-            'followings' => 'nullable|integer',
+            'image' => 'nullable|string'
         ]);
 
         $find = ProfileUser::find($id);
@@ -84,7 +94,7 @@ class ProfileUserController extends Controller
         } else {
             return response([
                 'message' => 'Não foi possível achar o perfil do usuário.'
-            ], 403);
+            ], 404);
         }
 
         return response([
@@ -103,7 +113,7 @@ class ProfileUserController extends Controller
         } else {
             return response([
                 'message' => 'Não foi possível achar o perfil do usuário.'
-            ], 403);
+            ], 404);
         }
 
         return response([

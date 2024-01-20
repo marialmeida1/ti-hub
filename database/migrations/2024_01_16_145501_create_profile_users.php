@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('location', 200)->nullable();
             $table->string('job', 120)->nullable();
             $table->string('image')->nullable();
-            $table->integer('followers')->nullable();
-            $table->integer('followings')->nullable();
 
 
             // foreingID
