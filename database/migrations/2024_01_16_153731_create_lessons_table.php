@@ -17,8 +17,9 @@ return new class extends Migration
 
             // atributes
             $table->string('name', 250);
-            $table->text('description');
-            $table->string('link', 250);
+            $table->text('description')->nullable();
+            $table->string('link', 250)->nullable();
+            $table->text('image')->nullable();
 
             // foreingID
             $table->unsignedBigInteger('course_id');

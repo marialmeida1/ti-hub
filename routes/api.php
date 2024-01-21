@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,9 +29,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Profile User
     Route::post('/profile', [ProfileUserController::class, 'store']);
-    // Precisa estar logado para ver
     Route::get('/profile', [ProfileUserController::class, 'index']);
     Route::get('/profile/{id}', [ProfileUserController::class, 'show']);
     Route::patch('/profile/{id}', [ProfileUserController::class, 'update']);
     Route::delete('/profile/{id}', [ProfileUserController::class, 'destroy']);
+
+    // Post
+    Route::post('/post', [PostController::class, 'store']);
+    Route::get('/post', [PostController::class, 'index']);
+    Route::get('/post/user', [PostController::class, 'index_user']);
+    Route::get('/post/{id}', [PostController::class, 'show']);
+    Route::patch('/post/{id}', [PostController::class, 'update']);
+    Route::delete('/post/{id}', [PostController::class, 'destroy']);
 });
