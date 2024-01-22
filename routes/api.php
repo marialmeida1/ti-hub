@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentLessonController;
 use App\Http\Controllers\CommentPostController;
+use App\Http\Controllers\IndicationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileUserController;
 use Illuminate\Http\Request;
@@ -29,12 +30,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
+
     // Profile User
     Route::post('/profile', [ProfileUserController::class, 'store']);
     Route::get('/profile', [ProfileUserController::class, 'index']);
     Route::get('/profile/{id}', [ProfileUserController::class, 'show']);
     Route::patch('/profile/{id}', [ProfileUserController::class, 'update']);
     Route::delete('/profile/{id}', [ProfileUserController::class, 'destroy']);
+
 
     // Post
     Route::post('/post', [PostController::class, 'store']);
@@ -43,6 +46,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/post/{id}', [PostController::class, 'show']);
     Route::patch('/post/{id}', [PostController::class, 'update']);
     Route::delete('/post/{id}', [PostController::class, 'destroy']);
+
 
     // Comment for POST
     Route::post('/comment/post/{post}', [CommentPostController::class, 'store']);
@@ -57,4 +61,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/comment/lesson/{lesson}/{id}', [CommentLessonController::class, 'show']);
     Route::patch('/comment/lesson/{lesson}/{id}', [CommentLessonController::class, 'update']);
     Route::delete('/comment/lesson/{lesson}/{id}', [CommentLessonController::class, 'destroy']);
+
+
+    // Indication
+    Route::post('/indication/{lesson}', [IndicationController::class, 'store']);
+    Route::get('/indication/{lesson}', [IndicationController::class, 'index']);
+    Route::get('/indication/{lesson}/{id}', [IndicationController::class, 'show']);
+    Route::patch('/indication/{lesson}/{id}', [IndicationController::class, 'update']);
+    Route::delete('/indication/{lesson}/{id}', [IndicationController::class, 'destroy']);
 });

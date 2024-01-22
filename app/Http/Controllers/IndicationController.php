@@ -2,37 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\Indication;
 use App\Models\Lesson;
 use App\Models\ProfileUser;
 use Illuminate\Http\Request;
 
-class CommentLessonController extends Controller
+class IndicationController extends Controller
 {
-    // Create comment for lesson
+    // Create a new indication
     public function store(Request $request, $lesson)
     {
-        $lesson = (int)$lesson;
-        $lesson = Lesson::find($lesson);
 
         $user = auth()->user()->id;
         $profile_user = ProfileUser::where('user_id', $user)->first()->id;
 
         $validate = $request->validate([
-            'text' => 'nullable|string',
+            'text' => 'nullable|required_without:link|string',
+            'link' => 'nullable|required_without:text|string|max:180',
         ]);
 
         if ($profile_user) {
+            $lesson = Lesson::find($lesson);
+
             if ($lesson) {
-                $data = Comment::create([
-                    'profile_user_id' => $profile_user,
+                $data = Indication::create([
                     'lesson_id' => $lesson->id,
+                    'profile_user_id' => $profile_user,
                     'text' => $validate['text'],
+                    'link' => $validate['link']
                 ]);
 
                 return response([
                     'data' => $data,
-                    'message' => 'Comentário criado com sucesso!'
+                    'message' => 'Indicação criado com sucesso!'
                 ], 200);
             }
 
@@ -51,7 +53,7 @@ class CommentLessonController extends Controller
         $lesson = Lesson::find($lesson);
 
         if ($lesson) {
-            $data = Comment::where('lesson_id', $lesson->id)->get();
+            $data = Indication::where('lesson_id', $lesson->id)->get();
 
             if ($data) {
                 return response([
@@ -60,7 +62,7 @@ class CommentLessonController extends Controller
             }
 
             return response([
-                'message' => 'Comentários não encontrados!'
+                'message' => 'Indicações não encontradas!'
             ], 404);
         }
 
@@ -74,7 +76,7 @@ class CommentLessonController extends Controller
         $lesson = Lesson::find($lesson);
 
         if ($lesson) {
-            $find = Comment::find($id);
+            $find = Indication::find($id);
 
             if ($find) {
                 $lesson_id = $find->lesson_id;
@@ -87,7 +89,7 @@ class CommentLessonController extends Controller
             }
 
             return response([
-                'message' => 'Não foi possível achar o comentário do usuário.'
+                'message' => 'Não foi possível achar a indicação.'
             ], 404);
         }
 
@@ -103,7 +105,7 @@ class CommentLessonController extends Controller
 
         $lesson = Lesson::find($lesson);
 
-        $find = Comment::find($id);
+        $find = Indication::find($id);
 
         if ($find) {
             $profile_user_post = $find->profile_user_id;
@@ -116,23 +118,24 @@ class CommentLessonController extends Controller
 
 
                         $validate = $request->validate([
-                            'text' => 'nullable|string',
+                            'text' => 'nullable|required_without:link|string',
+                            'link' => 'nullable|required_without:text|string|max:180',
                         ]);
 
                         $find->update($request->all());
 
                         return response([
-                            'message' => 'Comentário atualizado com sucesso!',
+                            'message' => 'Indicação atualizado com sucesso!',
                             'data' => $find
                         ], 200);
                     }
 
                     return response([
-                        'message' => 'Você não é dono do comentário'
+                        'message' => 'Você não é dono da indicação'
                     ], 406);
                 }
                 return response([
-                    'message' => 'Não foi possível achar o comentário.'
+                    'message' => 'Não foi possível achar a indicação.'
                 ], 404);
             }
 
@@ -142,7 +145,7 @@ class CommentLessonController extends Controller
         }
 
         return response([
-            'message' => 'Não foi possível achar o comentário.'
+            'message' => 'Não foi possível achar a indicação.'
         ], 404);
     }
 
@@ -153,7 +156,7 @@ class CommentLessonController extends Controller
 
         $lesson = Lesson::find($lesson);
 
-        $find = Comment::find($id);
+        $find = Indication::find($id);
 
         if ($find) {
             $profile_user_post = $find->profile_user_id;
@@ -167,18 +170,18 @@ class CommentLessonController extends Controller
                         $find->delete();
 
                         return response([
-                            'message' => 'Comentário deletado com sucesso!',
+                            'message' => 'Indicação deletada com sucesso!',
                             'data' => $find
                         ], 200);
                     }
 
                     return response([
-                        'message' => 'Você não é dono do comentário'
+                        'message' => 'Você não é dono da indicação'
                     ], 406);
                 }
 
                 return response([
-                    'message' => 'Não foi possível achar o comentário.'
+                    'message' => 'Não foi possível achar a indicação.'
                 ], 404);
             }
 
@@ -188,7 +191,7 @@ class CommentLessonController extends Controller
         }
 
         return response([
-            'message' => 'Não foi possível achar o comentário.'
+            'message' => 'Não foi possível achar a indicação.'
         ], 404);
     }
 }
