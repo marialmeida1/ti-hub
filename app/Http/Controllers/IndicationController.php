@@ -149,7 +149,7 @@ class IndicationController extends Controller
         ], 404);
     }
 
-    public function destroy(Request $request, $lesson, $id)
+    public function destroy($lesson, $id)
     {
         $user = auth()->user()->id;
         $profile_user = ProfileUser::where('user_id', $user)->first()->id;

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentLessonController;
 use App\Http\Controllers\CommentPostController;
+use App\Http\Controllers\CompleteController;
 use App\Http\Controllers\IndicationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileUserController;
@@ -69,4 +70,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/indication/{lesson}/{id}', [IndicationController::class, 'show']);
     Route::patch('/indication/{lesson}/{id}', [IndicationController::class, 'update']);
     Route::delete('/indication/{lesson}/{id}', [IndicationController::class, 'destroy']);
+
+    // Indication
+    Route::post('/complete/{lesson}', [CompleteController::class, 'store']);
+    Route::get('/complete', [CompleteController::class, 'index']);
+    Route::get('/complete/{id}', [CompleteController::class, 'show']);
+    Route::delete('/complete/{id}', [CompleteController::class, 'destroy']);
 });
