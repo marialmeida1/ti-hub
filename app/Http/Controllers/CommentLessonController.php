@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Models\Post;
+use App\Models\Lesson;
 use App\Models\ProfileUser;
 use Illuminate\Http\Request;
 
-class CommentPostController extends Controller
+class CommentLessonController extends Controller
 {
-    // Create comment for post
-    public function store(Request $request, $post)
+    // Create comment for lesson
+    public function store(Request $request, $lesson)
     {
-        $post = (int)$post;
-        $post = Post::find($post);
+        $lesson = (int)$lesson;
+        $lesson = Lesson::find($lesson);
 
         $user = auth()->user()->id;
         $profile_user = ProfileUser::where('user_id', $user)->first()->id;
@@ -23,10 +23,10 @@ class CommentPostController extends Controller
         ]);
 
         if ($profile_user) {
-            if ($post) {
+            if ($lesson) {
                 $data = Comment::create([
                     'profile_user_id' => $profile_user,
-                    'post_id' => $post->id,
+                    'lesson_id' => $lesson->id,
                     'text' => $validate['text'],
                 ]);
 
@@ -37,7 +37,7 @@ class CommentPostController extends Controller
             }
 
             return response([
-                'message' => 'Post não encontrado!'
+                'message' => 'Aula não encontrado!'
             ], 404);
         }
 
@@ -46,13 +46,12 @@ class CommentPostController extends Controller
         ], 404);
     }
 
-    // Show all comments about one post
-    public function index($post)
+    public function index($lesson)
     {
-        $post = Post::find($post);
+        $lesson = Lesson::find($lesson);
 
-        if ($post) {
-            $data = Comment::where('post_id', $post->id)->get();
+        if ($lesson) {
+            $data = Comment::where('lesson_id', $lesson->id)->get();
 
             if ($data) {
                 return response([
@@ -66,21 +65,21 @@ class CommentPostController extends Controller
         }
 
         return response([
-            'message' => 'Post não encontrado!'
+            'message' => 'Aula não encontrado!'
         ], 404);
     }
 
-    public function show($post, $id)
+    public function show($lesson, $id)
     {
-        $post = Post::find($post);
+        $lesson = Lesson::find($lesson);
 
-        if ($post) {
+        if ($lesson) {
             $find = Comment::find($id);
 
             if ($find) {
-                $post_id = $find->post_id;
+                $lesson_id = $find->lesson_id;
 
-                if ($post->id == $post_id) {
+                if ($lesson->id == $lesson_id) {
                     return response([
                         'data' => $find
                     ], 200);
@@ -93,25 +92,25 @@ class CommentPostController extends Controller
         }
 
         return response([
-            'message' => 'Post não encontrado!'
+            'message' => 'Aula não encontrado!'
         ], 404);
     }
 
-    public function update(Request $request, $post, $id)
+    public function update(Request $request, $lesson, $id)
     {
         $user = auth()->user()->id;
         $profile_user = ProfileUser::where('user_id', $user)->first()->id;
 
-        $post = Post::find($post);
+        $lesson = Lesson::find($lesson);
 
         $find = Comment::find($id);
 
         if ($find) {
             $profile_user_post = $find->profile_user_id;
-            $post_id = $find->post_id;
+            $lesson_id = $find->lesson_id;
 
-            if ($post) {
-                if ($post->id == $post_id) {
+            if ($lesson) {
+                if ($lesson->id == $lesson_id) {
 
                     if ($profile_user === $profile_user_post) {
 
@@ -132,14 +131,13 @@ class CommentPostController extends Controller
                         'message' => 'Você não é dono do comentário'
                     ], 406);
                 }
-
                 return response([
                     'message' => 'Não foi possível achar o comentário.'
                 ], 404);
             }
 
             return response([
-                'message' => 'Não foi possível achar o post.'
+                'message' => 'Não foi possível achar a aula.'
             ], 404);
         }
 
@@ -148,21 +146,21 @@ class CommentPostController extends Controller
         ], 404);
     }
 
-    public function destroy(Request $request, $post, $id)
+    public function destroy(Request $request, $lesson, $id)
     {
         $user = auth()->user()->id;
         $profile_user = ProfileUser::where('user_id', $user)->first()->id;
 
-        $post = Post::find($post);
+        $lesson = Lesson::find($lesson);
 
         $find = Comment::find($id);
 
         if ($find) {
             $profile_user_post = $find->profile_user_id;
-            $post_id = $find->post_id;
+            $lesson_id = $find->lesson_id;
 
-            if ($post) {
-                if ($post->id == $post_id) {
+            if ($lesson) {
+                if ($lesson->id == $lesson_id) {
 
                     if ($profile_user === $profile_user_post) {
 
@@ -185,7 +183,7 @@ class CommentPostController extends Controller
             }
 
             return response([
-                'message' => 'Não foi possível achar o post.'
+                'message' => 'Não foi possível achar a aula.'
             ], 404);
         }
 

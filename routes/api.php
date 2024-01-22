@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentLessonController;
 use App\Http\Controllers\CommentPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileUserController;
@@ -49,4 +50,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/comment/post/{post}/{id}', [CommentPostController::class, 'show']);
     Route::patch('/comment/post/{post}/{id}', [CommentPostController::class, 'update']);
     Route::delete('/comment/post/{post}/{id}', [CommentPostController::class, 'destroy']);
+
+    // Comment for LESSON
+    Route::post('/comment/lesson/{lesson}', [CommentLessonController::class, 'store']);
+    Route::get('/comment/lesson/{lesson}', [CommentLessonController::class, 'index']);
+    Route::get('/comment/lesson/{lesson}/{id}', [CommentLessonController::class, 'show']);
+    Route::patch('/comment/lesson/{lesson}/{id}', [CommentLessonController::class, 'update']);
+    Route::delete('/comment/lesson/{lesson}/{id}', [CommentLessonController::class, 'destroy']);
 });
