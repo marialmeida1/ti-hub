@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentLessonController;
 use App\Http\Controllers\CommentPostController;
 use App\Http\Controllers\CompleteController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IndicationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileUserController;
@@ -71,9 +72,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::patch('/indication/{lesson}/{id}', [IndicationController::class, 'update']);
     Route::delete('/indication/{lesson}/{id}', [IndicationController::class, 'destroy']);
 
-    // Indication
+
+    // Complete
     Route::post('/complete/{lesson}', [CompleteController::class, 'store']);
     Route::get('/complete', [CompleteController::class, 'index']);
     Route::get('/complete/{id}', [CompleteController::class, 'show']);
     Route::delete('/complete/{id}', [CompleteController::class, 'destroy']);
+
+
+    // Followers
+    Route::post('/follower/{following}', [FollowerController::class, 'store']);
+    Route::get('/follower', [FollowerController::class, 'index_follower']);
+    Route::get('/following', [FollowerController::class, 'index_following']);
+    Route::get('/follower/{id}', [FollowerController::class, 'show_follower']);
+    Route::get('/following/{id}', [FollowerController::class, 'show_following']);
+    Route::delete('/follower/{id}', [FollowerController::class, 'destroy']);
 });

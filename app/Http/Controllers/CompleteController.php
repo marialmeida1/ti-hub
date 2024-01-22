@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class CompleteController extends Controller
 {
-    public function store(Request $request, $lesson)
+    public function store($lesson)
     {
 
         $user = auth()->user()->id;
