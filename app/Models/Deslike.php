@@ -12,7 +12,7 @@ class Deslike extends Model
     protected $fillable = [
         'profile_user_id',
         'post_id',
-        'lesson_id'
+        'comment_id'
     ];
 
     public function profile_user()

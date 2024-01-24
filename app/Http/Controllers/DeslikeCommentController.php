@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Models\Like;
+use App\Models\Deslike;
 use App\Models\ProfileUser;
 use Illuminate\Http\Request;
 
-class LikeCommentController extends Controller
+class DeslikeCommentController extends Controller
 {
     public function store($comment)
     {
@@ -17,38 +17,43 @@ class LikeCommentController extends Controller
         $user = auth()->user()->id;
         $profile_user = ProfileUser::where('user_id', $user)->first()->id;
 
-        if ($profile_user) {
+        if ($comment) {
+            if ($profile_user) {
 
-            $liked = Like::where('comment_id', $comment->id)
-                ->where('profile_user_id', $profile_user)
-                ->first();
+                $desliked = Deslike::where('comment_id', $comment->id)
+                    ->where('profile_user_id', $profile_user)
+                    ->first();
 
 
-            if (!$liked) {
-                if ($comment) {
-                    $data = Like::create([
-                        'profile_user_id' => $profile_user,
-                        'comment_id' => $comment->id,
-                    ]);
+                if (!$desliked) {
+                    if ($comment) {
+                        $data = Deslike::create([
+                            'profile_user_id' => $profile_user,
+                            'comment_id' => $comment->id,
+                        ]);
+
+                        return response([
+                            'data' => $data,
+                            'message' => 'Deslike criado com sucesso!'
+                        ], 200);
+                    }
 
                     return response([
-                        'data' => $data,
-                        'message' => 'Curtida criado com sucesso!'
-                    ], 200);
+                        'message' => 'Comentário não encontrado!'
+                    ], 404);
                 }
 
                 return response([
-                    'message' => 'Comentário não encontrado!'
+                    'message' => 'Esse comentário já recebeu um deslike de você!'
                 ], 404);
             }
 
             return response([
-                'message' => 'Esse comentário já foi curtido por você!'
+                'message' => 'Usuário não encontrado!'
             ], 404);
         }
-
         return response([
-            'message' => 'Usuário não encontrado!'
+            'message' => 'Comentário não encontrado!'
         ], 404);
     }
 
@@ -57,7 +62,7 @@ class LikeCommentController extends Controller
         $comment = Comment::find($comment);
 
         if ($comment) {
-            $data = Like::where('comment_id', $comment->id)->get();
+            $data = Deslike::where('comment_id', $comment->id)->get();
 
             if ($data) {
                 return response([
@@ -66,7 +71,7 @@ class LikeCommentController extends Controller
             }
 
             return response([
-                'message' => 'Curtidas não encontrados!'
+                'message' => 'Deslikes não encontrados!'
             ], 404);
         }
 
@@ -80,7 +85,7 @@ class LikeCommentController extends Controller
         $comment = Comment::find($comment);
 
         if ($comment) {
-            $find = Like::find($id);
+            $find = Deslike::find($id);
 
             if ($find) {
                 $comment_id = $find->comment_id;
@@ -93,7 +98,7 @@ class LikeCommentController extends Controller
             }
 
             return response([
-                'message' => 'Não foi possível achar a curtida do usuário.'
+                'message' => 'Não foi possível achar o deslike do usuário.'
             ], 404);
         }
 
@@ -109,7 +114,7 @@ class LikeCommentController extends Controller
 
         $comment = Comment::find($comment);
 
-        $find = Like::find($id);
+        $find = Deslike::find($id);
 
         if ($find) {
             $profile_user_comment = $find->profile_user_id;
@@ -123,18 +128,18 @@ class LikeCommentController extends Controller
                         $find->delete();
 
                         return response([
-                            'message' => 'Curtida excluída com sucesso!',
+                            'message' => 'Deslike excluído com sucesso!',
                             'data' => $find
                         ], 200);
                     }
 
                     return response([
-                        'message' => 'Você não é dono da curtida.'
+                        'message' => 'Você não é dono do deslike.'
                     ], 406);
                 }
 
                 return response([
-                    'message' => 'Não foi possível achar a curtida.'
+                    'message' => 'Não foi possível achar o deslike.'
                 ], 404);
             }
 
@@ -144,7 +149,7 @@ class LikeCommentController extends Controller
         }
 
         return response([
-            'message' => 'Não foi possível achar a curtida.'
+            'message' => 'Não foi possível achar o deslike.'
         ], 404);
     }
 }

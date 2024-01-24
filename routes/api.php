@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentLessonController;
 use App\Http\Controllers\CommentPostController;
 use App\Http\Controllers\CompleteController;
+use App\Http\Controllers\DeslikeCommentController;
+use App\Http\Controllers\DeslikePostController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IndicationController;
 use App\Http\Controllers\LikeCommentController;
@@ -102,4 +104,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/like/comment/{comment}', [LikeCommentController::class, 'index']);
     Route::get('/like/comment/{comment}/{id}', [LikeCommentController::class, 'show']);
     Route::delete('/like/comment/{comment}/{id}', [LikeCommentController::class, 'destroy']);
+
+    // Deslikes for POSTS
+    Route::post('/deslike/post/{post}', [DeslikePostController::class, 'store']);
+    Route::get('/deslike/post/{post}', [DeslikePostController::class, 'index']);
+    Route::get('/deslike/post/{post}/{id}', [DeslikePostController::class, 'show']);
+    Route::delete('/deslike/post/{post}/{id}', [DeslikePostController::class, 'destroy']);
+
+
+    // Deslikes for Comment
+    Route::post('/deslike/comment/{comment}', [DeslikeCommentController::class, 'store']);
+    Route::get('/deslike/comment/{comment}', [DeslikeCommentController::class, 'index']);
+    Route::get('/deslike/comment/{comment}/{id}', [DeslikeCommentController::class, 'show']);
+    Route::delete('/deslike/comment/{comment}/{id}', [DeslikeCommentController::class, 'destroy']);
 });
