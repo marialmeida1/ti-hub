@@ -6,6 +6,7 @@ use App\Http\Controllers\CommentPostController;
 use App\Http\Controllers\CompleteController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IndicationController;
+use App\Http\Controllers\LikeCommentController;
 use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileUserController;
@@ -95,4 +96,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/like/post/{post}', [LikePostController::class, 'index']);
     Route::get('/like/post/{post}/{id}', [LikePostController::class, 'show']);
     Route::delete('/like/post/{post}/{id}', [LikePostController::class, 'destroy']);
+
+    // LIkes for Comment
+    Route::post('/like/comment/{comment}', [LikeCommentController::class, 'store']);
+    Route::get('/like/comment/{comment}', [LikeCommentController::class, 'index']);
+    Route::get('/like/comment/{comment}/{id}', [LikeCommentController::class, 'show']);
+    Route::delete('/like/comment/{comment}/{id}', [LikeCommentController::class, 'destroy']);
 });
