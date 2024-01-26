@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MdDarkMode } from "react-icons/md";
-import { MdOutlineDarkMode } from "react-icons/md";
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 const ThemeSwitcher = () => {
     const [darkMode, setDarkMode] = useState(false);
@@ -21,8 +20,12 @@ const ThemeSwitcher = () => {
 
     return (
         <button
-            onClick={toggleDarkMode}        >
-            {darkMode ? < MdDarkMode className='h-5 w-5' /> : < MdOutlineDarkMode className='h-5 w-5' />}
+            onClick={toggleDarkMode}>
+            {darkMode ?
+                <FaMoon className="h-5 w-5" />
+                :
+                <FaSun className="h-5 w-5" />
+            }
         </button>
     );
 };

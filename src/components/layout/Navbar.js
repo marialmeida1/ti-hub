@@ -1,9 +1,11 @@
 import { useState } from "react";
-import Dropdown from "./components/Dropdown";
-import { FaBars } from "react-icons/fa";
-import { TbHexagonLetterT } from "react-icons/tb";
 
+import Dropdown from "./components/Dropdown";
 import ThemeSwitcher from "../../theme/ThemeSwitcher";
+
+import { TbHexagonLetterT } from "react-icons/tb";
+import { FaBars } from "react-icons/fa";
+
 
 function Navbar() {
 
@@ -15,13 +17,13 @@ function Navbar() {
 
     return (
         <nav className="">
-            <div className='max-w-full mx-auto '>
+            <div className='max-w-full mx-auto'>
 
                 {/* Componentes NavBar */}
                 <div className='dark:bg-zinc-800 flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8 shadow-sm '>
 
                     {/* Logo  */}
-                    <div className='flex flex-nowrap'>
+                    <div className='flex flex-nowrap cursor-pointer '>
                         <TbHexagonLetterT className="h-6 w-6" />
                         <p className='font-bold ps-2'>TI - HUB</p>
                     </div>
@@ -37,7 +39,7 @@ function Navbar() {
 
                         {/* Option Mobile */}
                         <button onClick={handleOpen} className='md:hidden transition h-8 w-8 flex justify-center items-center hover:rounded-lg hover:bg-zinc-200 hover:dark:bg-zinc-700'>
-                            <FaBars className="h-t w-t text-zinc-700 dark:text-zinc-400 hover:dark:text-zinc-500" />
+                            <FaBars className="h-6 w-6  text-zinc-700 dark:text-zinc-400" />
                         </button>
 
                         {/* Option Web */}
@@ -54,7 +56,6 @@ function Navbar() {
                         </div>
                     </div>
                 </div>
-
                 {/* Option Menu */}
                 {open ? (
                     null

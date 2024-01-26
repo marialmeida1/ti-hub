@@ -3,46 +3,55 @@
 @tailwind utilities;
 
 @layer base {
-    html, body{
-      font-family: "Inter", system-ui, sans-serif;
-    }
-
-    .dark {
-      @apply bg-zinc-900 text-zinc-50
-    }
+  html,
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    @apply bg-zinc-100 dark:bg-zinc-900;
   }
 
-@layer components {
+  .dark {
+    @apply bg-zinc-900 text-zinc-50;
+  }
+}
 
+@layer components {
   .btn {
-    @apply py-2 px-3 bg-zinc-100 font-medium text-zinc-600 rounded-md;
+    @apply py-2 px-3 bg-zinc-100 font-medium text-zinc-600 rounded-md cursor-pointer;
   }
 
   .btn:hover {
-    @apply transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300;
+    @apply transition ease-in-out delay-75  duration-300;
   }
-  
+
   .btn-primary {
-    @apply bg-teal-400 text-white;
+    @apply bg-emerald-600 text-white;
   }
 
   .btn-primary:hover {
-    @apply bg-teal-500;
+    @apply bg-emerald-800;
   }
 
   .btn-secondary {
-    @apply bg-teal-50 text-zinc-600;
+    @apply bg-emerald-100 text-zinc-600;
   }
 
   .btn-secondary:hover {
-    @apply bg-teal-100;
+    @apply bg-gray-900 text-zinc-300;
   }
 
   .btn-dark {
     @apply bg-zinc-700 text-zinc-300;
   }
 
+  .btn-dark:hover {
+    @apply text-zinc-700 bg-zinc-300;
+  }
+
   .link:hover {
-    @apply underline underline-offset-2;
+    @apply underline underline-offset-2 cursor-pointer;
+  }
+
+  .icon-link {
+    @apply hover:text-emerald-600 cursor-pointer transition-colors;
   }
 }
