@@ -3,15 +3,18 @@ import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 
 function App() {
+
   return (
-    <Router>
-      <Navbar />
-      <div>
-        <Routes>
-          <Route exact path="/" Component={Home} />
-        </Routes>
-      </div>
-    </Router>
+    <div>
+      <Router>
+        <Navbar />
+        <div>
+          <Routes>
+            <Route exact path="/" Component={Home} />
+          </Routes>
+        </div>
+      </Router>
+    </div>
   );
 }
 

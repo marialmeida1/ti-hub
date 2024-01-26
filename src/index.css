@@ -6,12 +6,16 @@
     html, body{
       font-family: "Inter", system-ui, sans-serif;
     }
+
+    .dark {
+      @apply bg-zinc-900 text-zinc-50
+    }
   }
 
 @layer components {
 
   .btn {
-    @apply py-2 px-3 bg-gray-100 font-medium text-gray-600 rounded-md;
+    @apply py-2 px-3 bg-zinc-100 font-medium text-zinc-600 rounded-md;
   }
 
   .btn:hover {
@@ -27,11 +31,15 @@
   }
 
   .btn-secondary {
-    @apply bg-teal-50 text-gray-600;
+    @apply bg-teal-50 text-zinc-600;
   }
 
   .btn-secondary:hover {
     @apply bg-teal-100;
+  }
+
+  .btn-dark {
+    @apply bg-zinc-700 text-zinc-300;
   }
 
   .link:hover {
