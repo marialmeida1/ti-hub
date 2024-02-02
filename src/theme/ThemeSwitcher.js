@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { FaMoon } from 'react-icons/fa';
+import { LuSun } from "react-icons/lu";
+
 
 const ThemeSwitcher = () => {
     const [darkMode, setDarkMode] = useState(false);
@@ -24,7 +26,7 @@ const ThemeSwitcher = () => {
             {darkMode ?
                 <FaMoon className="h-5 w-5" />
                 :
-                <FaSun className="h-5 w-5" />
+                <LuSun className="h-5 w-5" />
             }
         </button>
     );

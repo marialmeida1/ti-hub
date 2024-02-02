@@ -5,7 +5,7 @@
 @layer base {
   html,
   body {
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: "Raleway", system-ui, sans-serif;
     @apply bg-zinc-100 dark:bg-zinc-900;
   }
 
@@ -24,34 +24,24 @@
   }
 
   .btn-primary {
-    @apply bg-emerald-600 text-white;
+    @apply bg-emerald-800 text-white;
   }
 
   .btn-primary:hover {
-    @apply bg-emerald-800;
+    @apply bg-emerald-500;
   }
 
   .btn-secondary {
-    @apply bg-emerald-100 text-zinc-600;
+    @apply bg-emerald-50 text-zinc-800;
   }
 
   .btn-secondary:hover {
-    @apply bg-gray-900 text-zinc-300;
+    @apply bg-zinc-800 text-zinc-50;
   }
+}
 
-  .btn-dark {
-    @apply bg-zinc-700 text-zinc-300;
-  }
-
-  .btn-dark:hover {
-    @apply text-zinc-700 bg-zinc-300;
-  }
-
+@layer utilities {
   .link:hover {
     @apply underline underline-offset-2 cursor-pointer;
-  }
-
-  .icon-link {
-    @apply hover:text-emerald-600 cursor-pointer transition-colors;
   }
 }

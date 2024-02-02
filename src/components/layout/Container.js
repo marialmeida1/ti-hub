@@ -1,6 +1,6 @@
 function Container(props) {
     return (
-        <div className="max-w-7xl flex justify-between flex-wrap min-h-screen m-10">
+        <div className="flex justify-between flex-wrap min-h-screen">
             {props.children}
         </div>
     );

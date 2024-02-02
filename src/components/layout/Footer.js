@@ -19,12 +19,14 @@ function Footer() {
             {/* About */}
             <div className="p-4 sm:p-6 lg:p-8 md:grid md:grid-cols-3 md:items-start flex flex-col items-center justify-center">
                 <div className="flex justify-center">
+                    {/* About */}
                     <div className=" md:max-w-56 max-w-64">
                         <h1 className="text-lg font-bold w-full pb-6 pt-4 dark:text-gray-300">Projeto</h1>
                         <p className="font-medium text-justify">O projeto foi realizado como uma forma de estudo, envolvendo o uso de ferramentas importantes para o desenvolvimento front-end.</p>
                     </div>
                 </div>
                 <div className="flex justify-center">
+                    {/* Ferramentas */}
                     <div className=" md:max-w-56 max-w-64 md:min-w-56 min-w-64">
                         <h1 className="text-lg font-bold w-full pb-6 pt-4 dark:text-gray-300">Ferramentas</h1>
                         <ul className="space-y-3">
@@ -35,6 +37,7 @@ function Footer() {
                     </div>
                 </div>
                 <div className="flex justify-center">
+                    {/* Contact */}
                     <div className=" md:max-w-56 max-w-64">
                         <h1 className="text-lg font-bold w-full pb-6 pt-4 dark:text-gray-300">Contato</h1>
                         <ul className="space-y-3">
