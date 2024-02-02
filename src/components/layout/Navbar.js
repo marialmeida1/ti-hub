@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 import Dropdown from "./components/Dropdown";
 import ThemeSwitcher from "../../theme/ThemeSwitcher";
+import Button from "./components/Button";
 
 import { TbHexagonLetterT } from "react-icons/tb";
 import { FaBars } from "react-icons/fa";
-import Button from "./components/Button";
 
 
 function Navbar() {
@@ -24,16 +25,17 @@ function Navbar() {
                 <div className='bg-inherit flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8 shadow-sm '>
 
                     {/* Logo  */}
-                    <div className='flex flex-nowrap cursor-pointer text-zinc-100'>
+                    <Link to='/' className='flex flex-nowrap cursor-pointer text-zinc-100' >
                         <TbHexagonLetterT className="h-6 w-6" />
                         <p className='font-bold ps-2'>TI - HUB</p>
-                    </div>
+                    </Link>
 
                     {/* Links */}
-                    <div className='space-x-16 font-medium text-zinc-100 hidden md:block'>
-                        <button className='link'>Cursos</button>
-                        <button className='link'>Notícias</button>
-                        <button className='link'>Comunidade</button>
+                    <div className='space-x-6 font-medium text-zinc-100 hidden md:block'>
+                        <Link className="link" to="/">Home</Link>
+                        <Link className="link" to="/courses">Cursos</Link>
+                        <Link className="link" to="/news">Notícias</Link>
+                        <Link className="link" to="/community">Comunidade</Link>
                     </div>
 
                     <div className="flex flex-nowrap">
