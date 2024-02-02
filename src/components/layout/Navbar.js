@@ -5,6 +5,7 @@ import ThemeSwitcher from "../../theme/ThemeSwitcher";
 
 import { TbHexagonLetterT } from "react-icons/tb";
 import { FaBars } from "react-icons/fa";
+import Button from "./components/Button";
 
 
 function Navbar() {
@@ -38,15 +39,15 @@ function Navbar() {
                     <div className="flex flex-nowrap">
 
                         {/* Option Mobile */}
-                        <button onClick={handleOpen} className='md:hidden transition h-8 w-8 flex justify-center items-center hover:rounded-lg hover:bg-zinc-200'>
-                            <FaBars className="h-6 w-6  text-zinc-10" />
+                        <button onClick={handleOpen} className='md:hidden transition h-8 w-8 flex justify-center items-center hover:rounded-lg hover:bg-zinc-600 hover:opacity-70'>
+                            <FaBars className="h-6 w-6  text-zinc-100" />
                         </button>
 
                         {/* Option Web */}
                         <div className='hidden md:block'>
                             <div className='space-x-6'>
-                                <button className='btn btn-secondary'>Entrar</button>
-                                <button className='btn btn-primary'>Cadastrar</button>
+                                <Button color='primary' text='Login' />
+                                <Button color='secondary' text='Register' />
                             </div>
                         </div>
 
@@ -62,7 +63,7 @@ function Navbar() {
                 ) : <Dropdown />
                 }
             </div>
-        </nav>
+        </nav >
     );
 }
 
