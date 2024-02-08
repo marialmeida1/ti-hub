@@ -17,6 +17,17 @@ function Navbar() {
         setOpen(!open)
     }
 
+    const dropdownAuth = [
+        {
+            label: 'Login',
+            to: '/login'
+        },
+        {
+            label: 'Register',
+            to: '/register'
+        }
+    ]
+
     return (
         <nav>
             <div className='max-w-full mx-auto'>
@@ -48,8 +59,8 @@ function Navbar() {
                         {/* Option Web */}
                         <div className='hidden md:block'>
                             <div className='space-x-6'>
-                                <Button color='primary' text='Login' />
-                                <Button color='secondary' text='Register' />
+                                <Button color='primary' text='Login' to="/login" />
+                                <Button color='secondary' text='Register' to='/register' />
                             </div>
                         </div>
 
@@ -62,7 +73,7 @@ function Navbar() {
                 {/* Option Menu */}
                 {open ? (
                     null
-                ) : <Dropdown />
+                ) : <Dropdown items={dropdownAuth} />
                 }
             </div>
         </nav >

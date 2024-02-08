@@ -1,10 +1,12 @@
-function Button({ color, rounded, text }) {
+import { Link } from "react-router-dom"
+
+function Button({ color, rounded, text, to }) {
 
     const colors = (value) => {
-        if (value == 'primary') {
+        if (value.toString() === 'primary') {
             return 'bg-emerald-800 text-gray-50 hover:bg-emerald-500'
         }
-        else if (value == 'secondary') {
+        else if (value.toString() === 'secondary') {
             return 'bg-emerald-50 text-gray-800 hover:bg-gray-600 hover:text-gray-50'
         }
         else {
@@ -13,7 +15,7 @@ function Button({ color, rounded, text }) {
     }
 
     const roundeds = (value) => {
-        if (value == 'full') {
+        if (value.toString() === 'full') {
             return 'rounded-full'
         }
 
@@ -27,7 +29,7 @@ function Button({ color, rounded, text }) {
     const defaultStyles = 'py-1.5 px-3.5 font-medium cursor-pointer'
 
     return (
-        <button className={`${defaultStyles} ${colorStyles} ${roundedStyles}`}>{text}</button>
+        <button className={`${defaultStyles} ${colorStyles} ${roundedStyles}`}><Link to={to}>{text}</Link></button>
     );
 }
 
